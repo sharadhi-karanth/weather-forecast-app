@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#243b55">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <h1>Weatherly ☀️</h1>
+            <p>Your daily weather companion</p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name..."
+            >
+
+            <button id="searchBtn">Search</button>
+        </section>
+
+        <p id="errorMessage"></p>
+
+        <!-- Current Weather -->
+        <section class="weather-card">
+
+            <h2 id="cityName">Bengaluru</h2>
+            <p id="date">Current Weather</p>
+
+            <div class="weather-info">
+                <span id="weatherIcon">☀️</span>
+
+                <div>
+                    <h1 id="temperature">--°C</h1>
+                    <p id="description">Search for a city</p>
+                </div>
+            </div>
+
+            <!-- Weather Details -->
+            <div class="weather-details">
+
+                <div class="detail">
+                    <span>💧</span>
+                    <p>Humidity</p>
+                    <h3 id="humidity">--%</h3>
+                </div>
+
+                <div class="detail">
+                    <span>💨</span>
+                    <p>Wind Speed</p>
+                    <h3 id="windSpeed">-- km/h</h3>
+                </div>
+
+                <div class="detail">
+                    <span>🌡️</span>
+                    <p>Feels Like</p>
+                    <h3 id="feelsLike">--°C</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Five Day Forecast -->
+        <section class="forecast-section">
+
+            <h2>5-Day Forecast</h2>
+
+            <div class="forecast-container" id="forecastContainer">
+
+                <p>Search for a city to see the forecast.</p>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Weatherly | Made with ❤️</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
