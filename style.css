@@ -222,3 +222,54 @@ footer {
         width: 100%;
     }
 }
+
+/* Location Button */
+#locationBtn {
+    background: #20a4c9;
+}
+
+#locationBtn:hover {
+    background: #1685a5;
+}
+
+.search-section button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Hourly Forecast */
+.hourly-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 5px 2px 15px;
+    scroll-behavior: smooth;
+}
+
+.hourly-card {
+    flex: 0 0 115px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    padding: 18px 10px;
+    text-align: center;
+}
+
+.hourly-card p {
+    color: #d0d9ef;
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.hourly-card .hourly-icon {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.hourly-card h3 {
+    font-size: 20px;
+}
+
+.hourly-card .rain-chance {
+    color: #9edcff;
+    font-size: 12px;
+}

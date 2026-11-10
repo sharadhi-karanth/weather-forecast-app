@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "weatherly-v1";
+const CACHE_NAME = "weatherly-v2";
 
 const APP_FILES = [
     "./",

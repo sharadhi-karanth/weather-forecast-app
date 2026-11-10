@@ -22,15 +22,11 @@
         </header>
 
         <!-- Search Section -->
-        <section class="search-section">
-            <input
-                type="text"
-                id="cityInput"
-                placeholder="Enter city name..."
-            >
-
-            <button id="searchBtn">Search</button>
-        </section>
+      <section class="search-section">
+    <input type="text" id="cityInput" placeholder="Enter city name...">
+    <button id="searchBtn">Search</button>
+    <button id="locationBtn">📍 Use My Location</button>
+</section>
 
         <p id="errorMessage"></p>
 
@@ -75,17 +71,19 @@
         </section>
 
         <!-- Five Day Forecast -->
-        <section class="forecast-section">
+       <section class="forecast-section">
+    <h2>24-Hour Forecast</h2>
+    <div class="hourly-container" id="hourlyContainer">
+        <p>Search for a city to see the hourly forecast.</p>
+    </div>
+</section>
 
-            <h2>5-Day Forecast</h2>
-
-            <div class="forecast-container" id="forecastContainer">
-
-                <p>Search for a city to see the forecast.</p>
-
-            </div>
-
-        </section>
+<section class="forecast-section">
+    <h2>5-Day Forecast</h2>
+    <div class="forecast-container" id="forecastContainer">
+        <p>Search for a city to see the forecast.</p>
+    </div>
+</section>
 
         <!-- Footer -->
         <footer>
