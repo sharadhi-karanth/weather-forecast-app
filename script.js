@@ -99,64 +99,79 @@ async function getWeather() {
 }
 
 // Detect the device's current location
-function getMyLocation() {
+
+async function getPlaceName(latitude, longitude) {
+    try {
+        const response = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not identify location");
+        }
+
+        const data = await response.json();
+
+        return (
+            data.city ||
+            data.locality ||
+            data.localityInfo?.administrative?.[0]?.name ||
+            data.principalSubdivision ||
+            "Your Location"
+        );
+
+    } catch (error) {
+        console.error("Location name error:", error);
+        return "Your Location";
+    }
+}
+
+async function getMyLocation() {
     if (!navigator.geolocation) {
-        errorMessage.textContent =
-            "Location detection is not supported by your browser.";
+        alert("Geolocation is not supported by your browser.");
         return;
     }
 
-    errorMessage.textContent = "Detecting your location...";
-
-    searchBtn.disabled = true;
     locationBtn.disabled = true;
+    locationBtn.textContent = "Detecting location...";
 
     navigator.geolocation.getCurrentPosition(
-        async function(position) {
-            try {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
+        async (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
 
-                await fetchWeather(
-                    latitude,
-                    longitude,
-                    "Your Location"
+            try {
+                const response = await fetch(
+                    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
                 );
 
-                errorMessage.textContent = "";
+                const locationData = await response.json();
+
+                const placeName =
+                    locationData.locality ||
+                    locationData.city ||
+                    locationData.principalSubdivision ||
+                    "Your Location";
+
+                await fetchWeather(latitude, longitude, placeName);
 
             } catch (error) {
-                errorMessage.textContent =
-                    error.message || "Unable to fetch local weather.";
-            } finally {
-                searchBtn.disabled = false;
-                locationBtn.disabled = false;
-            }
-        },
-
-        function(error) {
-            if (error.code === 1) {
-                errorMessage.textContent =
-                    "Location permission denied. Please allow location access.";
-            } else if (error.code === 2) {
-                errorMessage.textContent =
-                    "Your location is currently unavailable.";
-            } else {
-                errorMessage.textContent =
-                    "Location request timed out. Please try again.";
+                console.error("Location name detection failed:", error);
+                await fetchWeather(latitude, longitude, "Your Location");
             }
 
-            searchBtn.disabled = false;
             locationBtn.disabled = false;
+            locationBtn.textContent = "📍 Use My Location";
         },
 
-        {
-            enableHighAccuracy: true,
-            timeout: 15000,
-            maximumAge: 60000
+        (error) => {
+            alert("Unable to detect your location. Please allow location access.");
+            locationBtn.disabled = false;
+            locationBtn.textContent = "📍 Use My Location";
         }
     );
 }
+
 
 // Display current weather
 function displayWeather(name, data) {
